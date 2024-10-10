@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control" id="description" rows="3"
-                    placeholder="Description" name="description" required>{{old('description')}}</textarea>
+                    placeholder="Description" name="description">{{old('description')}}</textarea>
         </div>
 
         <div style="margin-top: 20px;"></div>
