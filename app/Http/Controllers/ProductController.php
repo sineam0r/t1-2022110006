@@ -29,15 +29,17 @@ class ProductController extends Controller
             'wholesale_price' => 'required|numeric|min:0',
             'origin' => 'required|string|size:2',
             'quantity' => 'required|integer|min:0',
-            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if($request->hasFile('product_image')){
-            $imagePath = $request->file('product_image')->store('public/images', ['visibility' => 'public']);
-            $validated['product_image'] = $imagePath;
-        }
+        $product = Product::create($validated);
 
-        Product::create($validated);
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePatch = $file->storeAs('public', $fileName);
+            $product->update(['photo' => asset('storage/' . $filePatch)]);
+        }
 
         return redirect()->route('products.index')->with('success', 'Product added successfully');
     }
@@ -55,33 +57,32 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'id' => 'required|string|max:12|unique:products,id',
+            'id' => 'required|string|max:12|unique:products,id,' . $product->id,
             'product_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'retail_price' => 'required|numeric|min:0',
             'wholesale_price' => 'required|numeric|min:0',
             'origin' => 'required|string|size:2',
             'quantity' => 'required|integer|min:0',
-            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if($request->hasFile('product_image')){
-            $imagePath = $request->file('product_image')->store('public/images');
-            if($product->product_image){
-                Storage::delete($product->product_image);
-            }
-            $validated['product_image'] = $imagePath;
-        }
-
         $product->update($validated);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePatch = $file->storeAs('public', $fileName);
+            $product->update(['photo' => asset('storage/' . $filePatch)]);
+        }
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
     public function destroy(Product $product)
     {
-        if($product->product_image){
-            Storage::delete($product->product_image);
+        if ($product->photo) {
+            Storage::delete(str_replace(asset('storage/'), 'public/', $product->photo));
         }
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');

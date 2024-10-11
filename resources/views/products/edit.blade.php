@@ -86,12 +86,15 @@
 
                 <div style="margin-top: 20px;"></div>
 
-                <div class="form-group">
-                    <label for="product_image" class="form-label">Product Image</label>
-                    <input type="file" class="form-control" id="product_image" name="product_image">
-                    @if ($product->product_image)
-                        <img src={{$product->product_image_url}} class="mt-3 img-thumbnail" style="max-width: 400px"/>
-                    @endif
+                <div class="col-6 mt-2 mb-2">
+                    <label class="form-label" for="photo">Photo</label>
+                    <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo" id="photo" accept="image/*">
+                    <img src="{{ Storage::url($product->photo) }}" alt="" width="100">
+                    @error('photo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div style="margin-top: 20px;"></div>

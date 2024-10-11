@@ -14,16 +14,26 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id"
+                    <input type="text" class="form-control @error('id') is-invalid @enderror" id="id"
                     placeholder="ID" name="id" required value="{{old('id')}}">
+                    @error('id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="product_name">Product Name</label>
-                    <input type="text" class="form-control" id="product_name"
+                    <input type="text" class="form-control @error('product_name') is-invalid @enderror" id="product_name"
                     placeholder="Product Name" name="product_name" required value="{{old('product_name')}}">
+                    @error('product_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -32,8 +42,13 @@
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="3"
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
                     placeholder="Description" name="description">{{old('description')}}</textarea>
+            @error('description')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div style="margin-top: 20px;"></div>
@@ -42,24 +57,39 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="retail_price">Retail Price</label>
-                    <input type="number" class="form-control" id="retail_price"
+                    <input type="number" class="form-control @error('retail_price') is-invalid @enderror" id="retail_price"
                     placeholder="Retail Price" name="retail_price" value="{{old('retail_price')}}">
+                    @error('retail_price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="wholesale_price">Wholesale Price</label>
-                    <input type="number" class="form-control" id="wholesale_price"
+                    <input type="number" class="form-control @error('wholesale_price') is-invalid @enderror" id="wholesale_price"
                     placeholder="Wholesale Price" name="wholesale_price" value="{{old('wholesale_price')}}">
+                    @error('wholesale_price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="origin">Origin</label>
-                    <input type="text" class="form-control" id="origin"
+                    <input type="text" class="form-control @error('origin') is-invalid @enderror" id="origin"
                     placeholder="Origin" name="origin" value="{{old('origin')}}">
+                    @error('origin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -68,15 +98,25 @@
 
         <div class="form-group">
             <label for="quantity">Quantity</label>
-            <input type="text" class="form-control" id="quantity"
+            <input type="text" class="form-control @error('quantity') is-invalid @enderror" id="quantity"
             placeholder="Quantity" name="quantity" value="{{old('quantity')}}">
+            @error('quantity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div style="margin-top: 20px;"></div>
 
-        <div class="form-group">
-            <label for="product_image">Product Image</label>
-            <input type="file" class="form-control" id="product_image" name="product_image">
+        <div class="col-6 mt-2 mb-2">
+            <label class="form-label" for="photo">Photo</label>
+            <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo" id="photo" accept="image/*">
+            @error('photo')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div style="margin-top: 30px;"></div>

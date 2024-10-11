@@ -16,7 +16,6 @@
     <div class="alert alert-success mt-1">
         {{ session()->get('success') }}
     </div>
-
 @endif
 
 <div class="container mt-3">
@@ -30,6 +29,7 @@
                 <th scope="col">Wholesale Price</th>
                 <th scope="col">Origin</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Image</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th scope="col">Action</th>
@@ -49,6 +49,9 @@
                 <td>{{$product->wholesale_price}}</td>
                 <td>{{$product->origin}}</td>
                 <td>{{$product->quantity}}</td>
+                <td class="text-center">
+                    <img src="{{ $product->photo ?? asset('img/no-image.jpg') }}" class="img-thumbnail w-25" alt="Product Image">
+                </td>
                 <td>{{$product->created_at}}</td>
                 <td>{{$product->updated_at}}</td>
                 <td>
@@ -67,7 +70,7 @@
                     </div>
                 </td>
             </tr>
-        @empty
+            @empty
             <tr>
                 <td colspan="7">No products found.</td>
             </tr>
