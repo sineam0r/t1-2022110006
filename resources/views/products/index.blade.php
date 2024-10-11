@@ -29,7 +29,7 @@
                 <th scope="col">Wholesale Price</th>
                 <th scope="col">Origin</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Image</th>
+                <th scope="col">Product Image</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th scope="col">Action</th>
@@ -50,7 +50,7 @@
                 <td>{{$product->origin}}</td>
                 <td>{{$product->quantity}}</td>
                 <td class="text-center">
-                    <img src="{{ $product->photo ?? asset('img/no-image.jpg') }}" class="img-thumbnail w-25" alt="Product Image">
+                    <img src="{{ $product->product_image ?? asset('img/no-image.jpg') }}" class="img-thumbnail w-25" alt="Product Image">
                 </td>
                 <td>{{$product->created_at}}</td>
                 <td>{{$product->updated_at}}</td>

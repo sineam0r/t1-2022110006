@@ -110,9 +110,9 @@
         <div style="margin-top: 20px;"></div>
 
         <div class="col-6 mt-2 mb-2">
-            <label class="form-label" for="photo">Photo</label>
-            <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo" id="photo" accept="image/*">
-            @error('photo')
+            <label class="form-label" for="product_image">Product Image</label>
+            <input class="form-control @error('product_image') is-invalid @enderror" type="file" name="product_image" id="product_image" accept="image/*">
+            @error('product_image')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

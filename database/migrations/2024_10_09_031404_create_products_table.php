@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->double('wholesale_price', 8, 2)->default(0.0);
             $table->char('origin', 2);
             $table->unsignedInteger('quantity')->default(0);
-            $table->text('photo')->nullable();
+            $table->text('product_image')->nullable();
             $table->timestamps(0);
         });
     }

@@ -29,16 +29,15 @@ class ProductController extends Controller
             'wholesale_price' => 'required|numeric|min:0',
             'origin' => 'required|string|size:2',
             'quantity' => 'required|integer|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::create($validated);
 
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $fileName = $file->hashName();
-            $filePatch = $file->storeAs('public', $fileName);
-            $product->update(['photo' => asset('storage/' . $filePatch)]);
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $filePath = $file->store('public/products');
+            $product->update(['product_image' => $filePath]);
         }
 
         return redirect()->route('products.index')->with('success', 'Product added successfully');
@@ -64,16 +63,18 @@ class ProductController extends Controller
             'wholesale_price' => 'required|numeric|min:0',
             'origin' => 'required|string|size:2',
             'quantity' => 'required|integer|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product->update($validated);
 
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $fileName = $file->hashName();
-            $filePatch = $file->storeAs('public', $fileName);
-            $product->update(['photo' => asset('storage/' . $filePatch)]);
+        if ($request->hasFile('product_image')) {
+            if ($product->product_image) {
+                Storage::delete($product->product_image);
+            }
+            $file = $request->file('product_image');
+            $filePath = $file->store('public/products');
+            $product->update(['product_image' => $filePath]);
         }
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
@@ -81,8 +82,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->photo) {
-            Storage::delete(str_replace(asset('storage/'), 'public/', $product->photo));
+        if ($product->product_name) {
+            Storage::delete('public/' . $product->product_name);
         }
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
