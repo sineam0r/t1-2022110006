@@ -29,7 +29,7 @@
                 <th scope="col">Wholesale Price</th>
                 <th scope="col">Origin</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Image</th>
+                <th scope="col">Product Image</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th scope="col">Action</th>

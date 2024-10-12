@@ -111,7 +111,7 @@
         <div style="margin-top: 20px;"></div>
 
         <div class="col-6 mt-2 mb-2">
-            <label class="form-label" for="photo">Photo</label>
+            <label class="form-label" for="photo">Product Image</label>
             <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo" id="photo" accept="image/*">
             @error('photo')
                 <span class="invalid-feedback" role="alert">
